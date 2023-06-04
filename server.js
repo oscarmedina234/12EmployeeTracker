@@ -55,8 +55,7 @@ inquirer
         getAllRoles();
 
     } else if (menuChoice === 'Add role') {
-        console.log('Add role');
-        promptUser();
+        addRolePrompt();
 
     } else if (menuChoice === 'View all departments') {
         console.log('View all department');
@@ -114,7 +113,32 @@ function updateEmployeeRolePrompt() {
         updateEmployeeRole(newRole, employId);
     })
 }
-
+//this is the prompt to add a new role 
+function addRolePrompt() {
+    inquirer
+    .prompt([
+        {
+            type: 'input',
+            name:'title',
+            message:'What is the new role title?'
+        },
+        {
+            type: 'input',
+            name: 'id',
+            message: 'Whats is the department id?'
+        },
+        {
+            type:'input',
+            name: 'salary',
+            message: 'What is the salary for the role?'
+        }
+    ]) .then((answers) => {
+        let title = answers.title;
+        let salary = answers.salary;
+        let departmentId = answers.id 
+        addRole(title, salary, departmentId);
+    })
+}
 //this function gets all employees then restarts the original prompt
 function getAllEmployees() {
     db.query('SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department, role.salary FROM employee JOIN role ON employee.role_id = role.id LEFT JOIN department ON role.department_id = department.id', (err, results) => {
