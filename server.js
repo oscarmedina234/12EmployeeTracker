@@ -61,8 +61,7 @@ inquirer
         allDepartments();
 
     } else {
-        console.log('Add department');
-        promptUser();
+        addDepartmentPrompt();
     }
   })
 };
@@ -138,6 +137,22 @@ function addRolePrompt() {
         addRole(title, salary, departmentId);
     })
 }
+
+//this is the prompt for the ad department function
+function addDepartmentPrompt() {
+    inquirer
+    .prompt([
+        {
+            type: 'input',
+            name:'name',
+            message:'What is the new department name?'
+        },
+    ]) .then((answers) => {
+        let name = answers.name;
+        addDepartment(name);
+    })
+}
+
 //this function gets all employees then restarts the original prompt
 function getAllEmployees() {
     db.query('SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department, role.salary FROM employee JOIN role ON employee.role_id = role.id LEFT JOIN department ON role.department_id = department.id', (err, results) => {
