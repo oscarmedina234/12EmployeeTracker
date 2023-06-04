@@ -132,7 +132,7 @@ function getAllEmployees() {
         if (err) {
             console.log(err);
           }
-          console.log(`${firstName} ${lastName} has been added to the database with the role id ${id}.`)
+          console.log(`${firstName} ${lastName} has been added to the database with the role id of ${id}.`)
           promptUser(); 
     })
   };
@@ -157,6 +157,17 @@ function updateEmployeeRole(newRole,employId) {
           console.table(results);  
           promptUser();
     });
+  };
+
+  //this function is going to add a new role 
+  function addRole(title, salary, departmentId) {
+    db.query('INSERT INTO role (title, salary,  department_id)Values (?,?,?);',[title, salary, departmentId], (err, results) => {
+        if (err) {
+            console.log(err);
+          }
+          console.log(`${title} role in the ${departmentId} id has been added to the database with the salary of $${salary}.`)
+          promptUser(); 
+    })
   };
 
 // Default response for any other request (Not Found)
