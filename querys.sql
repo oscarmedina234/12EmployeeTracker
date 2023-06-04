@@ -23,7 +23,7 @@ INSERT INTO role (title, salary,  department_id)
 VALUES ();
 
 --view all departments--
-SELECT * FROM departments;
+SELECT * FROM department;
 
 --add department--
 

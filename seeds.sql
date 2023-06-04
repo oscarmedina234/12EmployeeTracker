@@ -17,7 +17,7 @@ VALUES ('Sales Lead', 80000, 1),
 ('Account Manager', 80000, 4),
 ('Accountant', 65000, 4),
 ('Legal Team Lead', 75000, 5),
-('Layer', 100000, 5);
+('Lawyer', 100000, 5);
 
 INSERT INTO employee (first_name, last_name, role_id)
 Values ('Finn', 'The Human',5),

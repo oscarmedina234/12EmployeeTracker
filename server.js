@@ -210,7 +210,7 @@ function updateEmployeeRole(newRole,employId) {
 
   //this function views all departments
   function allDepartments() {
-    db.query('SELECT * FROM departments;', (err, results) => {
+    db.query('SELECT * FROM department;', (err, results) => {
         if (err) {
             console.log(err);
           } 
