@@ -52,8 +52,7 @@ inquirer
         updateEmployeeRolePrompt();
 
     } else if (menuChoice === 'View all roles') {
-        console.log('View all roles');
-        promptUser();
+        getAllRoles();
 
     } else if (menuChoice === 'Add role') {
         console.log('Add role');
@@ -144,11 +143,22 @@ function updateEmployeeRole(newRole,employId) {
         if (err) {
             console.log(err);
           }
-          console.log(`The employee with the id ${employId} role has been changed to ${newRole}.`);
+          console.log(`The role of the employee with the id of ${employId} has been changed to ${newRole}.`);
           promptUser(); 
     })
   };
-  
+
+  //this function gets all the roles 
+  function getAllRoles() {
+    db.query('SELECT role.id, role.title, role.salary, department.name FROM role JOIN department ON role.department_id = department.id', (err, results) => {
+        if (err) {
+            console.log(err);
+          } 
+          console.table(results);  
+          promptUser();
+    });
+  };
+
 // Default response for any other request (Not Found)
 app.use((req, res) => {
     res.status(404).end();
