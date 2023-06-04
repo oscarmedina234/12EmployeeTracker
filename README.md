@@ -12,6 +12,9 @@ To install the app make sure you use npm i in the package.json file to install i
 
 To use the app make sure to run the server.js file in the terminal with node. Using the node server.js command. Once running the server.js file you will be greeted with the inquire prompts. Choose the correct option to you to do and follow the prompts. 
 
+https://drive.google.com/file/d/15yP13s2crc85EER6SfmhXV37Gbk6CnZ5/view
+
+![gif](./assets/Untitled_%20Jun%204%2C%202023%203_21%20AM.gif)
 
 ## Credits
 
