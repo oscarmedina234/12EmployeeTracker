@@ -58,8 +58,7 @@ inquirer
         addRolePrompt();
 
     } else if (menuChoice === 'View all departments') {
-        console.log('View all department');
-        promptUser();
+        allDepartments();
 
     } else {
         console.log('Add department');
@@ -194,6 +193,16 @@ function updateEmployeeRole(newRole,employId) {
     })
   };
 
+  //this function views all departments
+  function allDepartments() {
+    db.query('SELECT * FROM departments;', (err, results) => {
+        if (err) {
+            console.log(err);
+          } 
+          console.table(results);  
+          promptUser();
+    });
+  };
 // Default response for any other request (Not Found)
 app.use((req, res) => {
     res.status(404).end();
