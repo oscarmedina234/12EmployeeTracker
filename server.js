@@ -45,9 +45,8 @@ inquirer
     if (menuChoice === 'View all employees') {
        getAllEmployees();
 
-    } else if (menuChoice === 'Add employees') {
-        
-        promptUser();
+    } else if (menuChoice === 'Add employee') {
+        addEmployeesPrompt();
 
     } else if (menuChoice === 'Update employee role') {
         console.log('Update employee role');
@@ -109,12 +108,10 @@ function getAllEmployees() {
   };
 
   function addEmployee(firstName, lastName, id) {
-    db.query(`INSERT INTO employee (first_name, last_name, role_id)
-Values (${firstName},${lastName},${id};`, (err, results) => {
+    db.query('INSERT INTO employee (first_name, last_name, role_id)Values (?,?,?);',[firstName, lastName, id], (err, results) => {
         if (err) {
             console.log(err);
           }
-          console.table(results); 
           promptUser(); 
     })
   };
