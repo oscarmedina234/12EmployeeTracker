@@ -9,14 +9,7 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-// Default response for any other request (Not Found)
-app.use((req, res) => {
-    res.status(404).end();
-  });
-  
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-  });
+
 
 const db = mysql.createConnection(
     {
@@ -50,48 +43,89 @@ inquirer
   .then((answers) => {
     const {menuChoice} = answers;
     if (menuChoice === 'View all employees') {
-        console.log('View all employess');
+       getAllEmployees();
 
     } else if (menuChoice === 'Add employees') {
-        console.log('Add employee');
+        
+        promptUser();
 
     } else if (menuChoice === 'Update employee role') {
         console.log('Update employee role');
+        promptUser();
 
     } else if (menuChoice === 'View all roles') {
         console.log('View all roles');
+        promptUser();
 
     } else if (menuChoice === 'Add role') {
-        console,log('Add role');
+        console.log('Add role');
+        promptUser();
 
     } else if (menuChoice === 'View all departments') {
-        console,log('View all department');
+        console.log('View all department');
+        promptUser();
 
     } else {
-        console,log('Add department');
+        console.log('Add department');
+        promptUser();
     }
-  };
-   
-  );
+  })
 };
 
-  function getAllEmployees() {
+function addEmployeesPrompt() {
+    inquirer
+    .prompt([
+        {
+            type: 'input',
+            name:'first_name',
+            message:'Whats the first name?'
+        },
+        {
+            type: 'input',
+            name: 'last_name',
+            message: 'Whats is the last name?'
+        },
+        {
+            type:'input',
+            name:'role_id',
+            message: 'What is the role id?'
+        }
+    ]) .then((answers) => {
+        let firstName = answers.first_name;
+        let lastName = answers.last_name;
+        let roleId = answers.role_id;
+        addEmployee(firstName, lastName, roleId);
+    })
+}
+
+function getAllEmployees() {
     db.query('SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department, role.salary FROM employee JOIN role ON employee.role_id = role.id LEFT JOIN department ON role.department_id = department.id', (err, results) => {
         if (err) {
             console.log(err);
-          } else {
-            return console.table(results);  
-          }
+          } 
+          console.table(results);  
+          promptUser();
     });
   };
 
-  function addEmployee(addEmployeeQuery) {
-    db.query(addEmployeeQuery, (err, results) => {
+  function addEmployee(firstName, lastName, id) {
+    db.query(`INSERT INTO employee (first_name, last_name, role_id)
+Values (${firstName},${lastName},${id};`, (err, results) => {
         if (err) {
             console.log(err);
           }
-          console.table(results);  
+          console.table(results); 
+          promptUser(); 
     })
   };
+
+// Default response for any other request (Not Found)
+app.use((req, res) => {
+    res.status(404).end();
+  });
+  
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
 
   promptUser();
