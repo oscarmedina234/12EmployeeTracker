@@ -203,6 +203,17 @@ function updateEmployeeRole(newRole,employId) {
           promptUser();
     });
   };
+
+  //this function adds a new department 
+  function addDepartment(name) {
+    db.query('INSERT INTO department (name)Values (?);',[name], (err, results) => {
+        if (err) {
+            console.log(err);
+          }
+          console.log(`The ${name} department has been added to the database.`)
+          promptUser(); 
+    })
+  };
 // Default response for any other request (Not Found)
 app.use((req, res) => {
     res.status(404).end();
