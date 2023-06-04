@@ -49,19 +49,28 @@ inquirer
   ])
   .then((answers) => {
     const {menuChoice} = answers;
-    switch (menuChoice) {
-        case 'View all employees':
-            getAllEmployees();
+    if (menuChoice === 'View all employees') {
+        console.log('View all employess');
 
-            promptUser();
+    } else if (menuChoice === 'Add employees') {
+        console.log('Add employee');
 
-            break;
+    } else if (menuChoice === 'Update employee role') {
+        console.log('Update employee role');
 
-        case 'Add employee':
-        
-            addEmployee();
+    } else if (menuChoice === 'View all roles') {
+        console.log('View all roles');
+
+    } else if (menuChoice === 'Add role') {
+        console,log('Add role');
+
+    } else if (menuChoice === 'View all departments') {
+        console,log('View all department');
+
+    } else {
+        console,log('Add department');
     }
-  }
+  };
    
   );
 };
